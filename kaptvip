@@ -23,7 +23,7 @@ local EXPIRY_DATE = "20260419"
 function SECURITY_CHECK()
     local currentDate = os.date("%Y%m%d")
     if currentDate > EXPIRY_DATE then
-        gg.alert("❌ SCRIPT EXPIRED!\nExpiry: 2026-04-18\nStatus: Outdated", "EXIT")
+        gg.alert("❌ SCRIPT EXPIRED!\nExpiry: 2026-04-19\nStatus: Outdated", "EXIT")
         os.exit()
     end
 
