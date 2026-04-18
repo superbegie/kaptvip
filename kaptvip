@@ -1,0 +1,353 @@
+-- ====================== KaptVIP STABLE BYPASS FIXED ======================
+gg.setVisible(false)
+gg.toast("🔧 Applying Stable Bypass...")
+
+gg.sleep(500)
+gg.clearResults()
+gg.clearList()
+
+-- Light & Stable Bypass
+gg.setRanges(gg.REGION_ANONYMOUS | gg.REGION_C_BSS)
+gg.sleep(300)
+
+gg.toast("🛡️ Stable Bypass Activated")
+gg.alert("✅ KaptVIP Loaded Successfully!\n\nStable Bypass v2\nUse in Virtual Space", "OK")
+-- ====================== END OF BYPASS ======================
+
+-- ====================== SECURITY ======================
+
+local LICENSE_KEY1 = "KAPT-X100-VIP-2026"
+local LICENSE_KEY2 = "BEGIE"
+local EXPIRY_DATE = "20260417"
+
+function SECURITY_CHECK()
+    local currentDate = os.date("%Y%m%d")
+    if currentDate > EXPIRY_DATE then
+        gg.alert("❌ SCRIPT EXPIRED!\nExpiry: 2026-04-18\nStatus: Outdated", "EXIT")
+        os.exit()
+    end
+
+    local auth = gg.prompt({"🔑 ENTER PREMIUM KEY :"}, {""}, {"text"})
+    
+    if not auth then 
+        os.exit() 
+    end
+    
+    if auth[1] == LICENSE_KEY1 or auth[1] == LICENSE_KEY2 then
+        if auth[1] == LICENSE_KEY2 then
+            gg.toast("✅ ADMIN ACCESS GRANTED - WELCOME BEGIE")
+        else
+            gg.toast("✅ ACCESS GRANTED - WELCOME PREMIUM USER")
+        end
+    else
+        gg.alert("🚫 ACCESS DENIED\nInvalid License Key provided.", "CLOSE")
+        os.exit()
+    end
+end
+
+-- Execute security before loading anything
+SECURITY_CHECK()
+
+-- ====================== WELCOME ======================
+gg.alert("\n  ⚡ WELCOME TO KAPTVIP 🛡️\n   USE YOUR OWN RISK                ")
+
+-- ====================== RADAR & VISUAL FUNCTIONS (ENEMY PLAYER) ======================
+
+function ApplyRadarV2()
+    gg.clearResults()
+    gg.setRanges(gg.REGION_C_BSS | gg.REGION_ANONYMOUS)
+    gg.searchNumber("98784247822", gg.TYPE_QWORD)
+    local r = gg.getResults(100)
+    if #r > 0 then
+        for i, v in ipairs(r) do
+            v.value = 98784247817
+            v.freeze = true
+        end
+        gg.setValues(r)
+        gg.toast("🚀 Radar V2 Activated")
+    else
+        gg.toast("⚠️ Radar not found. Try in Lobby")
+    end
+end
+
+function modifyCamera(search, replace, name)
+    gg.setRanges(gg.REGION_ANONYMOUS)
+    gg.clearResults()
+    gg.searchNumber(search, gg.TYPE_DWORD)
+    local r = gg.getResults(100)
+    for i, v in ipairs(r) do
+        local val = tostring(v.value)
+        if replace[val] then 
+            v.value = replace[val] 
+        end
+    end
+    gg.setValues(r)
+    gg.toast(name .. " Activated")
+end
+
+function DroneON()  
+    modifyCamera("1089806008;-1053839852;1089722122", 
+    {["1089806008"]="1092616192",["-1053839852"]="-1050620723",["1089722122"]="1092584735"}, 
+    "Drone View") 
+end
+
+function DroneOFF() 
+    modifyCamera("1092616192;-1050620723;1092584735", 
+    {["1092616192"]="1089806008",["-1050620723"]="-1053839852",["1089722122"]="1092584735"}, 
+    "Drone OFF") 
+end
+
+function TabletON() 
+    modifyCamera("1089806008;-1053839852;1089722122", 
+    {["1089806008"]="1092616192",["-1053839852"]="-1050620723",["1089722122"]="1092584735"}, 
+    "Tablet View") 
+end
+
+function RocketON() 
+    modifyCamera("1089806008;-1053839852;1089722122", 
+    {["1089806008"]="1097649357",["-1053839852"]="-1045902131",["1089722122"]="1097607414"}, 
+    "Rocket View") 
+end
+
+function HawkON()   
+    modifyCamera("1089806008;-1053839852;1089722122", 
+    {["1089806008"]="1097649357",["-1053839852"]="-1045902131",["1089722122"]="1097607414"}, 
+    "Hawk View") 
+end
+
+function grass1()
+    gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_ANONYMOUS)
+    gg.searchNumber("1;256;20", gg.TYPE_FLOAT)
+    gg.refineNumber("1", gg.TYPE_FLOAT)
+    local r = gg.getResults(200)
+    for i, v in ipairs(r) do
+        v.value = 0
+        v.freeze = true
+    end
+    gg.setValues(r)
+    gg.toast("🌿 No Grass Activated")
+end
+
+-- ====================== DAMAGE FUNCTIONS (AI/BOT ENEMY) ======================
+
+function damageBoosterLesley()
+    gg.clearResults()
+    gg.setRanges(gg.REGION_ANONYMOUS)
+
+    local stats = {HP = 2280, ATK = 145, DEF = 14, MDEF = 15, SPD = 240}
+
+    gg.alert("👉 Lesley Inject Ready", "Proceed")
+
+    local custom = gg.choice({"Use Default Values", "Custom Values"}, 1, "Choose Inject Mode")
+    if not custom then return end
+
+    local new_value_HP = stats.HP
+    local new_value_ATK = 12345
+    local new_value_SPD = stats.SPD
+    local new_value_DEF = stats.DEF
+
+    if custom == 2 then
+        local input = gg.prompt(
+            {"Enter HP", "Enter ATK", "Enter SPD", "Enter Defence"},
+            {stats.HP, stats.ATK, stats.SPD, stats.DEF},
+            {"number", "number", "number", "number"}
+        )
+        if not input then return end
+
+        new_value_HP = tonumber(input[1]) or stats.HP
+        new_value_ATK = tonumber(input[2]) or stats.ATK
+        new_value_SPD = tonumber(input[3]) or stats.SPD
+        new_value_DEF = tonumber(input[4]) or stats.DEF
+    end
+
+    -- Lesley Inject Process
+    gg.searchNumber(string.format("%d;%d;%d;%d;%d", stats.HP, stats.ATK, stats.DEF, stats.MDEF, stats.SPD), gg.TYPE_DWORD)
+    gg.refineNumber(string.format("%d;%d", stats.DEF, stats.MDEF), gg.TYPE_DWORD)
+    gg.getResults(100)
+    gg.editAll(new_value_DEF, gg.TYPE_DWORD)
+    gg.clearResults()
+
+    gg.searchNumber(string.format("%d;%d;%d;%d;%d", stats.HP, stats.ATK, new_value_DEF, new_value_DEF, stats.SPD), gg.TYPE_DWORD)
+    gg.refineNumber(stats.HP, gg.TYPE_DWORD)
+    gg.getResults(100)
+    gg.editAll(new_value_HP, gg.TYPE_DWORD)
+    gg.clearResults()
+
+    gg.searchNumber(string.format("%d;%d;%d;%d;%d", new_value_HP, stats.ATK, new_value_DEF, new_value_DEF, stats.SPD), gg.TYPE_DWORD)
+    gg.refineNumber(stats.ATK, gg.TYPE_DWORD)
+    gg.getResults(100)
+    gg.editAll(new_value_ATK, gg.TYPE_DWORD)
+    gg.clearResults()
+
+    gg.searchNumber(string.format("%d;%d;%d;%d;%d", new_value_HP, new_value_ATK, new_value_DEF, new_value_DEF, stats.SPD), gg.TYPE_DWORD)
+    gg.refineNumber(stats.SPD, gg.TYPE_DWORD)
+    gg.getResults(100)
+    gg.editAll(new_value_SPD, gg.TYPE_DWORD)
+    gg.clearResults()
+
+    gg.toast("✅ Lesley Inject Successful!")
+end
+
+function damageBoosterLayla()
+    gg.clearResults()
+    gg.setRanges(gg.REGION_ANONYMOUS)
+
+    gg.alert("👉 Layla Inject Ready", "Proceed")
+
+    local custom = gg.choice({"One Hit (Default)", "Custom ATK Value", "🔙 Back"}, 1, "Choose Inject Mode")
+    if not custom or custom == 3 then return end
+
+    local atk_value = 5555
+    if custom == 2 then
+        local input = gg.prompt({"Enter ATK Value"}, {5555}, {"number"})
+        if not input then return end
+        atk_value = tonumber(input[1]) or 5555
+    end
+
+    gg.searchNumber("240;133;2250", gg.TYPE_DWORD)
+    gg.refineNumber("133", gg.TYPE_DWORD)
+
+    local revert = gg.getResults(500)
+    if #revert == 0 then
+        gg.toast("❌ No Results Found. Try Again!")
+        gg.clearResults()
+        return
+    end
+
+    gg.editAll(tostring(atk_value), gg.TYPE_DWORD)
+    local t = gg.getResults(500)
+    gg.addListItems(t)
+
+    gg.clearResults()
+    gg.toast("✅ Layla One Hit Activated! ATK = " .. atk_value)
+end
+
+function skipperClassic()
+    gg.clearResults()
+    gg.setRanges(gg.REGION_ANONYMOUS)
+
+    local waktuList = {"⏳ 04:00", "⏳ 08:00", "⏳ 10:00", "⏳ 12:00"}
+    local waktuMap = {
+        ["⏳ 04:00"] = 240000,
+        ["⏳ 08:00"] = 480000,
+        ["⏳ 10:00"] = 600000,
+        ["⏳ 12:00"] = 720000
+    }
+
+    local pilihan = gg.choice(waktuList, nil, "🎮 Skip / Reset Match Time")
+    if not pilihan then return end
+
+    gg.searchNumber("30000;45000;1", gg.TYPE_DWORD)
+    gg.refineNumber("30000", gg.TYPE_DWORD)
+    local hasil = gg.getResults(10)
+
+    if #hasil == 0 then
+        gg.toast("No results found. Try again.")
+        return
+    end
+
+    local save = {}
+    for i, v in ipairs(hasil) do
+        table.insert(save, { address = v.address - 0x8, flags = gg.TYPE_DWORD })
+    end
+
+    local sebelum = gg.getValues(save)
+    gg.sleep(500)
+    local sesudah = gg.getValues(save)
+
+    local target = nil
+    for i = 1, #sebelum do
+        if sebelum[i].value ~= sesudah[i].value then
+            target = save[i]
+            break
+        end
+    end
+
+    if not target then
+        gg.toast("Failed to detect time address.")
+        return
+    end
+
+    target.value = waktuMap[waktuList[pilihan]]
+    target.name = "Match Time"
+
+    gg.setValues({target})
+    gg.addListItems({target})
+    gg.toast("✅ Match time set to " .. waktuList[pilihan])
+
+    gg.clearList()
+    gg.clearResults()
+end
+
+-- ====================== ENEMY PLAYER MENU ======================
+function enemyPlayerMenu()
+    local menu = gg.choice({
+        "1. Radar V2",
+        "2. Drone View Menu",
+        "3. No Grass",
+        "4. 🔙 Back"
+    }, nil, "👥 ENEMY PLAYER MENU")
+
+    if menu == 1 then ApplyRadarV2() end
+    if menu == 2 then 
+        local d = gg.choice({"Drone ON","Drone OFF","Tablet View","Rocket View","Hawk View","🔙 Back"}, nil, "📷 Drone / Camera Views")
+        if d == 1 then DroneON() end
+        if d == 2 then DroneOFF() end
+        if d == 3 then TabletON() end
+        if d == 4 then RocketON() end
+        if d == 5 then HawkON() end
+    end
+    if menu == 3 then grass1() end
+    if menu == 4 then return end
+end
+
+-- ====================== AI/BOT ENEMY MENU ======================
+function aiBotEnemyMenu()
+    local menu = gg.choice({
+        "⚔️ Hero Damage Inject",
+        "⏳ Skip / Reset Match Time",
+        "🔙 Back"
+    }, nil, "🤖 AI / BOT ENEMY MENU")
+
+    if menu == 1 then
+        local hero = gg.choice({
+            "🔫 Lesley",
+            "🔮 Layla",
+            "🔙 Back"
+        }, nil, "Select Hero for Damage Inject")
+
+        if hero == 1 then damageBoosterLesley() end
+        if hero == 2 then damageBoosterLayla() end
+    elseif menu == 2 then
+        skipperClassic()
+    elseif menu == 3 then
+        return
+    end
+end
+
+-- ====================== MAIN MENU ======================
+function mainMenu()
+    local menu = gg.choice({
+        "👥 ENEMY PLAYER",
+        "🤖 AI / BOT ENEMY",
+        "❌ Exit"
+    }, nil, "🎮 KAPTVIP - Main Menu")
+
+    if menu == 1 then
+        enemyPlayerMenu()
+    elseif menu == 2 then
+        aiBotEnemyMenu()
+    elseif menu == 3 then
+        gg.alert("\n                       🛡️ KAPTVIP 🛡️\n        Credit by : KAPTVIP")
+        os.exit()
+    end
+end
+
+-- ====================== MAIN LOOP ======================
+while true do
+    if gg.isVisible(true) then
+        gg.setVisible(false)
+        mainMenu()
+    end
+    gg.sleep(100)
+end
