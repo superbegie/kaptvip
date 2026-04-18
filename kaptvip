@@ -18,7 +18,7 @@ gg.alert("✅ KaptVIP Loaded Successfully!\n\nStable Bypass v2\nUse in Virtual S
 
 local LICENSE_KEY1 = "KAPT-X100-VIP-2026"
 local LICENSE_KEY2 = "BEGIE"
-local EXPIRY_DATE = "20260417"
+local EXPIRY_DATE = "20260418"
 
 function SECURITY_CHECK()
     local currentDate = os.date("%Y%m%d")
